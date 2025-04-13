@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'profile/edit_username_dialog.dart';
 import 'profile/providers/theme_provider.dart';
 import 'profile/providers/language_provider.dart';
-import 'profile/edit_username_dialog.dart';
 import 'profile/theme_dialog.dart';
 import 'profile/language_dialog.dart';
-import 'profile/confirm_dialog.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -34,11 +33,12 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+
   void _showThemeDialog() {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return ThemeDialog();
+        return const ThemeDialog();
       },
     );
   }
@@ -47,7 +47,34 @@ class _ProfilePageState extends State<ProfilePage> {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return LanguageDialog();
+        return const LanguageDialog();
+      },
+    );
+  }
+
+  void _showConfirmDialog(String title, String message, VoidCallback onConfirm) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                onConfirm();
+              },
+              child: const Text("Confirm"),
+            ),
+          ],
+        );
       },
     );
   }
@@ -77,7 +104,9 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           ListTile(
             title: const Text("Log Out"),
-            onTap: () => _showConfirmDialog("Log Out", "Are you sure?", () {}),
+            onTap: () => _showConfirmDialog("Log Out", "Are you sure?", () {
+
+            }),
           ),
           const ListTile(title: Text("Profile", style: TextStyle(fontWeight: FontWeight.bold))),
           ListTile(
@@ -94,10 +123,4 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
-}
-
-class _showConfirmDialog {
-}
-
-class EditUsernameDialog {
 }

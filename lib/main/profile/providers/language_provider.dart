@@ -13,11 +13,11 @@ class LanguageProvider extends ChangeNotifier {
   Locale get currentLocale {
     switch (_language) {
       case 'Indonesian':
-        return Locale('id', 'ID');
+        return const Locale('id', 'ID');
       case 'Spanish':
-        return Locale('es', 'ES');
+        return const Locale('es', 'ES');
       default:
-        return Locale('en', 'US');
+        return const Locale('en', 'US');
     }
   }
 }

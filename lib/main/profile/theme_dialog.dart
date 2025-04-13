@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'providers/theme_provider.dart';
 
 class ThemeDialog extends StatelessWidget {
+  const ThemeDialog({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
